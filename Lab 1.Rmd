@@ -1,0 +1,102 @@
+---
+title: "Lab 1: Intro to R"
+author: "Donald Butler"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+```
+
+### Exercise 1
+
+What command would you use to extract just the counts of girls baptized?
+
+```{r view-girls-counts}
+arbuthnot$girls
+```
+
+### Exercise 2
+
+Is there an apparent trend in the number of girls baptized over the years? How would you describe it?
+
+The trend in the number of girls baptized appears to be linear. The drop in baptismal rates for the period 1640-1660 is mostly likely caused by the [English Civil Wars](https://www.history.com/topics/british-history/english-civil-wars) (1642-1651).  
+
+```{r trend-girls}
+ggplot(arbuthnot,aes(year,girls))+geom_line()+geom_smooth(method = 'lm',formula = y ~ x)
+
+```
+
+### Exercise 3
+
+Now, generate a plot of the proportion of boys born over time. What do you see?
+
+I would have expected a 50/50 split between boys and girls, but the number of boys baptized were slightly higher than girls.  
+
+```{r plot-prop-boys-arbuthnot}
+arbuthnot <- arbuthnot %>% mutate(total = boys + girls)
+arbuthnot <- arbuthnot %>% mutate(boy_to_girl_ratio = boys / girls)
+arbuthnot <- arbuthnot %>% mutate(boy_ratio = boys / total)
+
+mean(arbuthnot$boy_ratio)
+
+ggplot(arbuthnot,aes(year,boy_ratio))+geom_point()
+
+```
+
+
+### Exercise 4
+
+What years are included in this data set? What are the dimensions of the data frame? What are the variable (column) names?
+
+The present data set contains 63 observations in years 1940 through 2002 of 3 variables (year, boys, and girls).
+
+```{r dim-present}
+present <- present %>% mutate(total = boys + girls)
+present <- present %>% mutate(boy_to_girl_ratio = boys / girls)
+present <- present %>% mutate(boy_ratio = boys / total)
+
+summary(present)
+```
+
+
+### Exercise 5
+
+How do these counts compare to Arbuthnot’s? Are they of a similar magnitude?
+
+The present dataset contains birth rates in the United States which is significantly larger than London. THe present dataset contains birth rates over 300 times Arbuthnot's data. 
+
+```{r count-compare}
+summary(arbuthnot)
+
+mean(present$total)/mean(arbuthnot$total)
+```
+
+### Exercise 6
+
+Make a plot that displays the proportion of boys born over time. What do you see? Does Arbuthnot’s observation about boys being born in greater proportion than girls hold up in the U.S.?
+
+THe present data set shows the same increased birth rates of boys over girls that was observed in the Arbuthnot data set.
+
+```{r plot-prop-boys-present}
+mean(present$boy_ratio)
+
+ggplot(arbuthnot,aes(year,boy_ratio))+geom_point()
+```
+
+
+### Exercise 7
+
+In what year did we see the most total number of births in the U.S.?
+
+The most total births in the present data set was 1961.
+
+```{r find-max-total}
+filter(present,total == max(total))
+```
+
