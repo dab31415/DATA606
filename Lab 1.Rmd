@@ -3,9 +3,9 @@ title: "Lab 1: Intro to R"
 author: "Donald Butler"
 date: "`r Sys.Date()`"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r load-packages, message=FALSE}
