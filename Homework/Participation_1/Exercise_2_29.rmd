@@ -1,0 +1,32 @@
+---
+title: "Exercise 2.29"
+author: "Donald Butler"
+date: "09/15/2021"
+output:
+  pdf_document:
+    extra_dependencies:
+    - geometry
+    - multicol
+    - multirow
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r library, warning=FALSE, message=FALSE, include=FALSE}
+library(tidyverse)
+```
+
+## 2.29 TV watchers
+
+Students in an AP Statistics class were asked how many hours of television they watch per week (including online streaming). This sample yielded an average of 4.71 hours, with a standard deviation of 4.18 hours. Is the distribution of number of hours students watch television weekly symmetric? If not, what shape would you expect this distribution to have? Explain your reasoning.
+
+
+The distribution is right skewed. The range of responses for the number of hours to television watched must be greater than or equal to 0. The standard deviation is nearly as large as the mean, so there must be high variability to the right.
+
+
