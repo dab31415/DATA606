@@ -1,0 +1,67 @@
+---
+title: 'DATA 606 Data Project Proposal'
+author: "Donald Butler"
+date: "11/07/2021"
+urlcolor: blue
+bibliography: references.bib
+biblio-style: apalike
+link-citations: true
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+### Data Preparation
+
+```{r setup, echo=TRUE, results='hide', warning=FALSE, message=FALSE}
+
+library(tidyverse)
+
+bike_data <- read_csv('https://raw.githubusercontent.com/dab31415/DATA606/main/Project_1/day.csv')
+
+```
+
+
+### Research question 
+
+Is temperature an accurate predictor for bicycle ride sharing?
+
+### Cases 
+
+Each observation is for a single day and contains the number of bicycles rented by casual and registered users in Washington DC. The observation also contains weather statistics for temperature, humidity, wind speed, and precipitation. 
+
+### Data collection 
+
+Bike Sharing data was collected through https://capitalbikeshare.com which provides bicycle rentals in Washington, DC. The researched collected two years of bike sharing data then added corresponding weather and seasonal information.
+
+### Type of study 
+
+This is an observational study.
+
+### Data Source 
+
+The data was obtained at https://archive.ics.uci.edu/ml/datasets/bike+sharing+dataset, and was originally published in 2013. [@fanaee]
+
+### Dependent Variable
+
+The dependent variable is the number of bicycles that were rented each day.
+
+### Independent Variable
+
+The independent variables are temperature and weather type.
+
+### Relevant summary statistics 
+
+
+```{r}
+summary(bike_data)
+
+bike_data %>%
+  ggplot(aes(temp,cnt)) + 
+  geom_point(aes(color = weathersit)) + 
+  geom_smooth(method = lm) +
+  facet_wrap(~ weathersit)
+  
+```
+

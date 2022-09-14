@@ -1,0 +1,56 @@
+---
+title: "Bike Ride Sharing"
+author: "Donald Butler"
+date: "12/6/2021"
+urlcolor: blue
+bibliography: references.bib
+biblio-style: apalike
+link-citations: true
+output: ioslides_presentation
+---
+
+<style>
+.small-code pre code {
+  font-size: 1em;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Part 1 - Introduction
+
+
+
+## Part 2 - Data
+class: small-code
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+bike_data <- read_csv('https://raw.githubusercontent.com/dab31415/DATA606/main/Project_1/day.csv') %>%
+  mutate(season_name = case_when(season == 1 ~ 'Winter', season == 2 ~ 'Spring',
+                                 season == 3 ~ 'Summer', season == 4 ~ 'Fall'),
+         weather_type = case_when(weathersit == 1 ~ 'Clear', weathersit == 2 ~ 'Mist',
+                                  weathersit == 3 ~ 'Rain', weathersit == 4 ~ 'Heavy Rain'),
+         dayofweek = case_when(weekday == 0 ~ 'Sun', weekday == 1 ~ 'Mon', weekday == 2 ~ 'Tue',
+                               weekday == 3 ~ 'Wed', weekday == 4 ~ 'Thu', weekday == 5 ~ 'Fri',
+                               weekday == 6 ~ 'Sat'),
+         workday = case_when(workingday == 0 ~ 'Weekend', workingday == 1 ~ 'Weekday'),
+         tempF = (1.8 * ((temp * 47)-8))+32) %>%
+  select(dteday, season_name, dayofweek, workday, weather_type, tempF, hum, windspeed, cnt)
+  
+```
+
+
+
+## Part 3 - Exploratory data analysis
+
+
+## Part 4 - Inference
+
+
+## Part 5 - Conclusion
+
+
+## References
